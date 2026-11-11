@@ -1,0 +1,208 @@
+{
+  "info": {
+    "name": "Taller de MicroServicios Spring Boot Hexagonal - Guia 3 (Render)",
+    "description": "Colección de pruebas para la Guía 3: Despliegue en Render (PaaS), verificación de seguridad inicial, Swagger/JWT y rotación de credenciales del administrador.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://users-management-api.onrender.com",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "GET /health (Estado del Servicio)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        }
+      }
+    },
+    {
+      "name": "GET / (Validar 401 Unauthorized)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/",
+          "host": ["{{baseUrl}}"],
+          "path": [""]
+        }
+      }
+    },
+    {
+      "name": "POST /api/auth/login (Admin Default)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"Admin1234!\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/auth/login",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "auth", "login"]
+        }
+      }
+    },
+    {
+      "name": "GET /api/users (Listar Usuarios)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/users",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "users"]
+        }
+      }
+    },
+    {
+      "name": "PUT /api/users/00000000-0000-0000-0000-000000000001 (Rotar Credenciales Admin)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Administrador\",\n  \"email\": \"nuevo-email@gmail.com\",\n  \"password\": \"La-nueva-clave-123!\",\n  \"role\": \"ADMIN\",\n  \"status\": \"ACTIVE\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/users/00000000-0000-0000-0000-000000000001",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "users", "00000000-0000-0000-0000-000000000001"]
+        }
+      }
+    },
+    {
+      "name": "POST /api/auth/login (Admin Nuevas Credenciales)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"nuevo-email@gmail.com\",\n  \"password\": \"La-nueva-clave-123!\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/auth/login",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "auth", "login"]
+        }
+      }
+    },
+    {
+      "name": "POST /api/users (Crear Usuario)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"0001\",\n  \"name\": \"Usuario Prueba\",\n  \"email\": \"usuario.prueba@example.com\",\n  \"password\": \"Abcde1234567**\",\n  \"role\": \"MEMBER\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/users",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "users"]
+        }
+      }
+    },
+    {
+      "name": "PUT /api/users/0001 (Activar Usuario)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Usuario Prueba\",\n  \"email\": \"usuario.prueba@example.com\",\n  \"role\": \"MEMBER\",\n  \"status\": \"ACTIVE\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/users/0001",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "users", "0001"]
+        }
+      }
+    },
+    {
+      "name": "GET /api/users/0001 (Obtener por ID)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/users/0001",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "users", "0001"]
+        }
+      }
+    },
+    {
+      "name": "DELETE /api/users/0001 (Eliminar por ID)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/users/0001",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "users", "0001"]
+        }
+      }
+    }
+  ]
+}
+
