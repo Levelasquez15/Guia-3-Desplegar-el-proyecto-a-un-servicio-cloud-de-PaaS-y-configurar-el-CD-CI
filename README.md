@@ -4,6 +4,10 @@ Microservicio backend desarrollado con **Java 17** y **Spring Boot 3.3.5** para 
 
 Esta versión corresponde a la **Guía 3**, enfocada en desplegar el contenedor Docker en **Render (PaaS)** conectado a MySQL remoto en **Aiven (SSL REQUIRED)** y habilitar el flujo completo de **CI/CD**.
 
+- **URL de producción (Render):** `https://guia-3-desplegar-el-proyecto-a-un.onrender.com`
+- **Health Check:** `https://guia-3-desplegar-el-proyecto-a-un.onrender.com/health`
+- **Swagger UI:** `https://guia-3-desplegar-el-proyecto-a-un.onrender.com/swagger-ui/index.html`
+
 ---
 
 ## Arquitectura y Flujo CI/CD
