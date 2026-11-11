@@ -1,3 +1,4 @@
+# Render Blueprint (IaC) - Guia 3: Despliegue PaaS Docker + CD automatico desde main
 services:
   - type: web
     name: users-management-api
